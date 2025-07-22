@@ -1,0 +1,21 @@
+# docker-compose.yml
+
+services:
+  app:
+    build: .
+    tty: true
+
+    network_mode: host
+    
+    volumes:
+      # ↓↓↓ この行を追加して、srcフォルダを強制的に同期させます ↓↓↓
+      - ./src:/workspaces/block_stacking_ml/src
+      - ./scripts:/workspaces/block_stacking_ml/scripts
+      - ./data:/workspaces/block_stacking_ml/data
+      - ./outputs:/workspaces/block_stacking_ml/outputs
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./configs:/workspaces/block_stacking_ml/configs
+      - .:/workspaces/block_stacking_ml
+
+    environment:
+      - DISPLAY=:1

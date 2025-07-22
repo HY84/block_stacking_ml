@@ -1,0 +1,17 @@
+// .devcontainer/devcontainer.json
+{
+	"name": "Block Stacking ML Dev",
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspaces/block_stacking_ml",
+	// この設定が重要：VSCodeのPython拡張機能にsrcフォルダの場所を直接教えます
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"python.analysis.extraPaths": [
+					"${containerWorkspaceFolder}/src"
+				]
+			}
+		}
+	}
+}
