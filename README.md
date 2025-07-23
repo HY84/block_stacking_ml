@@ -37,7 +37,6 @@ LEARNING_RATE = 0.005\
 │   └── 02_processed/       # 前処理済みデータ
 ├── outputs/                # 学習済みモデル・ログ
 │   ├── trained_models/     # 通常モデル
-│   └── trained_models_RNN/ # RNNモデル
 ├── scripts/                # 実行スクリプト
 ├── src/                    # Pythonモジュール群
 └── Dockerfile, docker-compose.yml, .devcontainer/
@@ -50,7 +49,6 @@ LEARNING_RATE = 0.005\
 - ブロック積み上げ盤面の状態抽象化・特徴量化
 - 人間の操作データ収集（GUI）
 - 機械学習による配置・回転予測モデルの構築
-- RNNによる時系列予測もサポート
 
 ---
 
