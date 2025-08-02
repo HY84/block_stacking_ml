@@ -14,7 +14,7 @@ from src.model import PlacementModel
 # --- 設定 ---
 CSV_PATH = "data/01_raw/stacking_data.csv"
 BATCH_SIZE = 64
-MODEL_PATH = "outputs/trained_models/placement_model.pth"
+MODEL_PATH = "outputs/trained_models/placement_model_20250802_061440.pth"
 NUM_BLOCK_TYPES = 4
 
 def main():
@@ -26,7 +26,7 @@ def main():
 
     model = PlacementModel(
         input_size=15,
-        num_slots=12,
+        num_slots=13,
         num_rotation_classes=3
     )
     try:
@@ -44,7 +44,8 @@ def main():
     sample_index = 0
     
     # data_utils.pyのエンコーディング順に合わせる
-    block_names = ['T', 'O', 'I', 'L']
+    # block_names = ['T', 'O', 'I', 'L']
+    block_names = ['T', 'L', 'I', 'O']
 
     print("\n--- 間違いの詳細 ---")
     

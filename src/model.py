@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 
 class PlacementModel(nn.Module):
-    def __init__(self, input_size=15, num_slots=12, num_rotation_classes=3):
+    def __init__(self, input_size=15, num_slots=13, num_rotation_classes=3):
         super(PlacementModel, self).__init__()
         
         # Shared hidden layers

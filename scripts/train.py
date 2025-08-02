@@ -10,13 +10,14 @@ import torch.optim as optim
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from src.data_utils import get_dataloaders
 from src.model import PlacementModel
+from datetime import datetime
 
 # --- ハイパーパラメータ設定 ---
 CSV_PATH = "data/01_raw/stacking_data.csv"
 BATCH_SIZE = 64
 EPOCHS = 200 # データセット全体を何回学習するか
 LEARNING_RATE = 0.005
-MODEL_SAVE_PATH = "outputs/trained_models/placement_model.pth"
+MODEL_SAVE_PATH = f"outputs/trained_models/placement_model_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pth"
 
 # scripts/train.py
 

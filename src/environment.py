@@ -7,7 +7,7 @@ import os
 import json
 
 # --- 定数設定 ---
-SCREEN_WIDTH = 1000
+SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 1200
 BLOCK_UNIT_SIZE = 15 # 細かいグリッド1マスの描画サイズ
 
@@ -20,7 +20,7 @@ class DataCollectorGUI:
         self.font = pygame.font.Font(None, 36)
 
         # --- グリッドと監視ポイントの定義 ---
-        self.grid_width = 45
+        self.grid_width = 60
         self.grid_height = 90
 
         # ▼▼▼ 土台のX座標オフセットを定義 ▼▼▼
