@@ -14,8 +14,8 @@ from src.model import PlacementModelRNN
 # --- ハイパーパラメータ設定 ---
 CSV_PATH = "data/01_raw/stacking_data.csv"
 BATCH_SIZE = 64
-EPOCHS = 200 # データセット全体を何回学習するか
-LEARNING_RATE = 0.005
+EPOCHS = 1000 # データセット全体を何回学習するか
+LEARNING_RATE = 0.001
 MODEL_SAVE_PATH = "outputs/trained_models_RNN/placement_model_RNN.pth"
 
 # scripts/train.py

@@ -14,7 +14,7 @@ from src.model import PlacementModel
 # --- 設定 ---
 CSV_PATH = "data/01_raw/stacking_data.csv"
 BATCH_SIZE = 64
-MODEL_PATH = "outputs/trained_models/placement_model_20250802_061440.pth"
+MODEL_PATH = "outputs/trained_models/placement_model_20250802_084113.pth"
 NUM_BLOCK_TYPES = 4
 
 def main():
@@ -52,8 +52,16 @@ def main():
     with torch.no_grad():
         for features, (labels_slot, labels_rotation) in val_loader:
             outputs_slot, outputs_rotation = model(features)
+
+            # ▼▼▼ MLP用のマスキング処理 ▼▼▼
+            # 1. 入力データからboard_state部分を取得
+            board_state = features[:, :13]
+            # 2. board_stateが-1のスロットをマスクする
+            mask = (board_state == -1).float() * -1e9
+            # 3. モデルの出力にマスクを適用
+            masked_outputs_slot = outputs_slot + mask
             
-            _, predicted_slot = torch.max(outputs_slot.data, 1)
+            _, predicted_slot = torch.max(masked_outputs_slot.data, 1)
             _, predicted_rotation = torch.max(outputs_rotation.data, 1)
             
             for i in range(len(labels_slot)):
@@ -74,7 +82,8 @@ def main():
                     
                     # 2. データを人間が読みやすい形式に戻す
                     #    (正規化を元に戻し、整数に)
-                    board_state_numpy = board_state_tensor.numpy()*20
+                    # board_state_numpy = board_state_tensor.numpy()*20
+                    board_state_numpy = board_state_tensor.numpy()
                     board_state_list = [int(round(x)) for x in board_state_numpy]
                     
                     block_type_index = torch.argmax(block_type_tensor).item()

@@ -15,8 +15,8 @@ from datetime import datetime
 # --- ハイパーパラメータ設定 ---
 CSV_PATH = "data/01_raw/stacking_data.csv"
 BATCH_SIZE = 64
-EPOCHS = 2000 # データセット全体を何回学習するか
-LEARNING_RATE = 0.001
+EPOCHS = 500 # データセット全体を何回学習するか
+LEARNING_RATE = 0.0025
 MODEL_SAVE_PATH = f"outputs/trained_models/placement_model_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pth"
 
 # scripts/train.py
@@ -46,17 +46,9 @@ def main():
             
             # ▼▼▼ モデルから2つの出力を受け取る ▼▼▼
             outputs_slot, outputs_rotation = model(features)
-
-            # ▼▼▼ MLP用のマスキング処理 ▼▼▼
-            # 1. 入力データからboard_state部分を取得
-            board_state = features[:, :13]
-            # 2. board_stateが-1のスロットをマスクする
-            mask = (board_state == -1).float() * -1e9
-            # 3. モデルの出力にマスクを適用
-            masked_outputs_slot = outputs_slot + mask
             
             # ▼▼▼ 損失をそれぞれ計算し、合計する ▼▼▼
-            loss_slot = criterion(masked_outputs_slot, labels_slot)
+            loss_slot = criterion(outputs_slot, labels_slot)
             loss_rotation = criterion(outputs_rotation, labels_rotation)
             loss = loss_slot + loss_rotation # 損失を合算
             

@@ -7,35 +7,22 @@ class PlacementModel(nn.Module):
     def __init__(self, input_size=15, num_slots=13, num_rotation_classes=3):
         super(PlacementModel, self).__init__()
         
-        # Shared hidden layers with increased depth and dropout for regularization
-        self.layer1 = nn.Linear(input_size, 128)
-        self.layer2 = nn.Linear(128, 256)
-        self.layer3 = nn.Linear(256, 256)
-        self.layer4 = nn.Linear(256, 128)
-        self.layer5 = nn.Linear(128, 64)
-        self.layer6 = nn.Linear(64, 32)
+        # Shared hidden layers
+        self.layer1 = nn.Linear(input_size, 64)
+        self.layer2 = nn.Linear(64, 128)
+        self.layer3 = nn.Linear(128, 64)
         self.relu = nn.ReLU()
-        self.dropout = nn.Dropout(p=0.3)
         
         # Output layer for slot prediction
-        self.slot_head = nn.Linear(32, num_slots)
+        self.slot_head = nn.Linear(64, num_slots)
         # Output layer for rotation prediction
-        self.rotation_head = nn.Linear(32, num_rotation_classes)
+        self.rotation_head = nn.Linear(64, num_rotation_classes)
 
     def forward(self, x):
         # Pass through shared layers
         x = self.relu(self.layer1(x))
-        x = self.dropout(x)
         x = self.relu(self.layer2(x))
-        x = self.dropout(x)
         x = self.relu(self.layer3(x))
-        x = self.dropout(x)
-        x = self.relu(self.layer4(x))
-        x = self.dropout(x)
-        x = self.relu(self.layer5(x))
-        x = self.dropout(x)
-        x = self.relu(self.layer6(x))
-        x = self.dropout(x)
         
         # Calculate outputs from each head
         slot_output = self.slot_head(x)

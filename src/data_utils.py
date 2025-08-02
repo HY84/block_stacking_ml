@@ -13,7 +13,8 @@ class StackingDataset(Dataset):
 
         # --- 特徴量 (X) の作成 (変更なし) ---
         board_state_cols = [f'z_{i}' for i in range(NUM_SLOTS)]
-        board_states = df[board_state_cols].values.astype(np.float32) / 20.0
+        # board_states = df[board_state_cols].values.astype(np.float32) / 20.0
+        board_states = df[board_state_cols].values.astype(np.float32)
         block_types = pd.get_dummies(df['block_type']).reindex(columns=['T', 'L', 'I', 'O'], fill_value=0).values.astype(np.float32)
         self.X = torch.tensor(np.hstack([board_states, block_types]), dtype=torch.float32)
 
