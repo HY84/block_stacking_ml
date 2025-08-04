@@ -15,7 +15,7 @@ sys.path.append(SRC_DIR)
 # --- ここまで ---
 
 # これで、Pythonは 'src' フォルダの中を直接探しに行けるようになります
-from environment import DataCollectorGUI
+from environment_only_dent import DataCollectorGUI
 
 def main():
     """

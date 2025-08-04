@@ -12,9 +12,9 @@ from src.data_utils import get_dataloaders
 from src.model import PlacementModel
 
 # --- 設定 ---
-CSV_PATH = "data/01_raw/stacking_data.csv"
+CSV_PATH = "data/01_raw/stacking_data_mountain.csv"
 BATCH_SIZE = 64
-MODEL_PATH = "outputs/trained_models/placement_model_20250802_084113.pth"
+MODEL_PATH = "outputs/trained_models/placement_model_mountain.pth"
 NUM_BLOCK_TYPES = 4
 
 def main():
